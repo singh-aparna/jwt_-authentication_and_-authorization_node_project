@@ -26,7 +26,6 @@ app.get("/", (req, res) => {
 //Inside the route handler callback, res.send is used to send a response back to the client. When a GET request is made to the root URL,
 //this line sends a plain text message to the client's browser explaining the project's purpose.
 
-
 //Summary-
 // Import Express: Import the Express module to create a web server.
 // Create App Instance: Initialize an Express application.
