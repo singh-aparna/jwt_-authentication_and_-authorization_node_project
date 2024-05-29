@@ -48,7 +48,22 @@ router.post("/", async (req, res) => {
     //This sends a response with status code 500 (Internal Server Error) and a JSON object containing an error message to the client.
   }
 });
-
+router.put("/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updatedUserData = req.body;
+    const response = await User.findByIdAndUpdate(userId, updatedUserData, {
+      new: true,
+      runValidators: true,
+    });
+    if (!response) return res.status(404).json({ err: "Person not found." });
+    console.log("Data updated.");
+    res.status(200).json(response);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: "Internal server error." });
+  }
+});
 module.exports = router;
 //This line exports the router object so it can be used in other parts of the application.
 //This allows you to import this router in your main application file and use it to handle requests to the routes defined in this router.
