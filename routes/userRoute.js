@@ -56,9 +56,21 @@ router.put("/:id", async (req, res) => {
       new: true,
       runValidators: true,
     });
-    if (!response) return res.status(404).json({ err: "Person not found." });
+    if (!response) {return res.status(404).json({ err: "Person not found." })}
     console.log("Data updated.");
     res.status(200).json(response);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: "Internal server error." });
+  }
+});
+router.delete("/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const response = await User.findByIdAndDelete(userId);
+    if (!response) return res.status(404).json({ err: "Person not found." });
+    console.log("Data deleted successfully.");
+    res.status(200).json({ message: "Data deleted successfully." });
   } catch (err) {
     console.log(err);
     res.status(500).json({ err: "Internal server error." });
