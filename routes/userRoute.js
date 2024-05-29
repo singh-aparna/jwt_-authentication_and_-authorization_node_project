@@ -56,7 +56,9 @@ router.put("/:id", async (req, res) => {
       new: true,
       runValidators: true,
     });
-    if (!response) {return res.status(404).json({ err: "Person not found." })}
+    if (!response) {
+      return res.status(404).json({ err: "Person not found." });
+    }
     console.log("Data updated.");
     res.status(200).json(response);
   } catch (err) {
